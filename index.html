@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="colors-container">
+        <div class="color">
+            <div class="color-hex">#000000</div>
+        </div>
+        <div class="color">
+            <div class="color-hex">#000000</div>
+        </div>
+        <div class="color">
+            <div class="color-hex">#000000</div>
+        </div>
+        <div class="color">
+            <div class="color-hex">#000000</div>
+        </div>
+    
+
+        <button class="refresh"><i class="fas fa-sync-alt"></i></button>
+        <div class="copied">A cor foi copiada.</div>
+    </div>
+
+    <script>
+        //set random colors
+        $('.refresh').click(function(){
+        $('.color').each(function(){
+          var rColor = '#' + Math.random().toString(16).substr(2,6);
+          $(this).css('background-color',rColor);
+          $(this).children(".color-hex").text(rColor);
+        });
+      }).trigger('click');
+
+      //copy to clipboard
+      $('.color').click(function(){
+        var input = $("<input>");
+        var color = $(this).children(".color-hex").text();    
+        $('body').append(input);
+        input.val(color).select();
+        document.execCommand('copy');
+        input.remove();
+        $('.copied').fadeIn().delay(2000).fadeOut();
+      });
+    </script>
+</body>
+</html>
